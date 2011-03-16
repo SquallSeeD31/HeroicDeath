@@ -40,6 +40,16 @@ public class HeroicDeath extends JavaPlugin
 	public static String messageColor;
 	public static String nameColor;
 	public static String itemColor;
+	public String mobUnknown;
+	public String mobMonster;
+	public String mobPigZombie;
+	public String mobZombie;
+	public String mobSkeleton;
+	public String mobSpider;
+	public String mobCreeper;
+	public String mobGhast;
+	public String mobSlime;
+	public String mobGiant;
 
 	public static String timestampFormat;
 	
@@ -57,16 +67,27 @@ public class HeroicDeath extends JavaPlugin
     pm.registerEvent(Event.Type.ENTITY_DAMAGED, this.listener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.ENTITY_DEATH, this.listener, Event.Priority.Monitor, this);
 
-    HeroicDeath.messageColor = getConfigColor("colors.message", "RED");
-    HeroicDeath.nameColor = getConfigColor("colors.name", "DARK_AQUA");
-    HeroicDeath.itemColor = getConfigColor("colors.item", "GOLD");
-    HeroicDeath.logData = this.config.getBoolean("log.data", true);
-    HeroicDeath.logMessages = this.config.getBoolean("log.messages", true);
-    HeroicDeath.timestampFormat = this.config.getString("log.time.format", "MM/dd/yyyy HH:mm:ss z");
-    HeroicDeath.timestampMessages = this.config.getBoolean("log.time.stamp", true);
+    messageColor = getConfigColor("colors.message", "RED");
+    nameColor = getConfigColor("colors.name", "DARK_AQUA");
+    itemColor = getConfigColor("colors.item", "GOLD");
+    logData = this.config.getBoolean("log.data", true);
+    logMessages = this.config.getBoolean("log.messages", true);
+    timestampFormat = this.config.getString("log.time.format", "MM/dd/yyyy HH:mm:ss z");
+    timestampMessages = this.config.getBoolean("log.time.stamp", true);
     this.eventsOnly = this.config.getBoolean("events.only", false);
-    HeroicDeath.dLog = this.config.getString("log.files.data", "death_data.log");
-    HeroicDeath.mLog = this.config.getString("log.files.messages", "death_messages.log");
+    dLog = this.config.getString("log.files.data", "death_data.log");
+    mLog = this.config.getString("log.files.messages", "death_messages.log");
+    mobUnknown = this.config.getString("monsters.unknown", "Unknown");
+    mobMonster = this.config.getString("monsters.monster", "Monster");
+    mobPigZombie = this.config.getString("monsters.pigzombie", "PigZombie");
+    mobZombie = this.config.getString("monsters.zombie", "Zombie");
+    mobSkeleton = this.config.getString("monsters.skeleton", "Skeleton");
+    mobSpider = this.config.getString("monsters.spider", "Spider");
+    mobCreeper = this.config.getString("monsters.creeper", "Creeper");
+    mobGhast = this.config.getString("monsters.ghast", "Ghast");
+    mobSlime = this.config.getString("monsters.slime", "Slime");
+    mobGiant = this.config.getString("monsters.giant", "Giant");
+
     saveConfig();
     try {
     	if (logData)
@@ -182,6 +203,17 @@ public class HeroicDeath extends JavaPlugin
 	  this.config.setProperty("log.files.data", dLog);
 	  this.config.setProperty("log.files.messages", mLog);
 	  this.config.setProperty("events.only", eventsOnly);
+	  this.config.setProperty("monsters.unknown", mobUnknown);
+	  this.config.setProperty("monsters.monster", mobMonster);
+	  this.config.setProperty("monsters.pigzombie", mobPigZombie);
+	  this.config.setProperty("monsters.zombie", mobZombie);
+	  this.config.setProperty("monsters.skeleton", mobSkeleton);
+	  this.config.setProperty("monsters.spider", mobSpider);
+	  this.config.setProperty("monsters.creeper", mobCreeper);
+	  this.config.setProperty("monsters.ghast", mobGhast);
+	  this.config.setProperty("monsters.slime", mobSlime);
+	  this.config.setProperty("monsters.giant", mobGiant);
+
 	  this.config.save();
   }
   

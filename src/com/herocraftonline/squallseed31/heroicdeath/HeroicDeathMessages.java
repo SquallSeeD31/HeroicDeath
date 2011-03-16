@@ -19,6 +19,13 @@ public class HeroicDeathMessages
   public ArrayList<String> FallMessages = new ArrayList<String>();
   public ArrayList<String> PVPMessages = new ArrayList<String>();
   public ArrayList<String> MonsterMessages = new ArrayList<String>();
+  public ArrayList<String> GhastMessages = new ArrayList<String>();
+  public ArrayList<String> SlimeMessages = new ArrayList<String>();
+  public ArrayList<String> ZombieMessages = new ArrayList<String>();
+  public ArrayList<String> PigZombieMessages = new ArrayList<String>();
+  public ArrayList<String> SpiderMessages = new ArrayList<String>();
+  public ArrayList<String> SkeletonMessages = new ArrayList<String>();
+  public ArrayList<String> GiantMessages = new ArrayList<String>();
   public ArrayList<String> LavaMessages = new ArrayList<String>();
   public ArrayList<String> SuffocationMessages = new ArrayList<String>();
   public ArrayList<String> DispenserMessages = new ArrayList<String>();
@@ -27,7 +34,7 @@ public class HeroicDeathMessages
 
   public void load(File dataFolder)
   {
-    ParseFile(dataFolder);
+    parseFile(dataFolder);
 	/* Messages hard-coded for now.
 	 * When I add my own persistence, these will be treated as defaults.
 	 * Can add custom lines for each type of mob in the future, if this is desired behavior.
@@ -62,7 +69,7 @@ public class HeroicDeathMessages
       this.OtherMessages.add("%d died from unknown causes");
   }
 
-  private void ParseFile(File dataFolder)
+  private void parseFile(File dataFolder)
   {
     try
     {
@@ -95,6 +102,20 @@ public class HeroicDeathMessages
           currentParse = HeroicDeathMessages.ParseType.PVP;
         else if (thisLine.toLowerCase().equals(":monsters"))
           currentParse = HeroicDeathMessages.ParseType.Monster;
+        else if (thisLine.toLowerCase().equals(":ghast"))
+            currentParse = HeroicDeathMessages.ParseType.Ghast;
+        else if (thisLine.toLowerCase().equals(":slime"))
+            currentParse = HeroicDeathMessages.ParseType.Slime;
+        else if (thisLine.toLowerCase().equals(":zombie"))
+            currentParse = HeroicDeathMessages.ParseType.Zombie;
+        else if (thisLine.toLowerCase().equals(":pigzombie"))
+            currentParse = HeroicDeathMessages.ParseType.PigZombie;
+        else if (thisLine.toLowerCase().equals(":spider"))
+            currentParse = HeroicDeathMessages.ParseType.Spider;
+        else if (thisLine.toLowerCase().equals(":skeleton"))
+            currentParse = HeroicDeathMessages.ParseType.Skeleton;
+        else if (thisLine.toLowerCase().equals(":giant"))
+            currentParse = HeroicDeathMessages.ParseType.Giant;
         else if (thisLine.toLowerCase().equals(":lava"))
           currentParse = HeroicDeathMessages.ParseType.Lava;
         else if (thisLine.toLowerCase().equals(":other"))
@@ -139,6 +160,27 @@ public class HeroicDeathMessages
           case Other:
             this.OtherMessages.add(thisLine);
             break;
+          case Ghast:
+        	this.GhastMessages.add(thisLine);
+        	break;
+          case Slime:
+        	  this.SlimeMessages.add(thisLine);
+        	  break;
+          case Zombie:
+        	  this.ZombieMessages.add(thisLine);
+        	  break;
+          case PigZombie:
+        	  this.PigZombieMessages.add(thisLine);
+        	  break;
+          case Spider:
+        	  this.SpiderMessages.add(thisLine);
+        	  break;
+          case Skeleton:
+        	  this.SkeletonMessages.add(thisLine);
+        	  break;
+          case Giant:
+        	  this.GiantMessages.add(thisLine);
+        	  break;
           case Dispenser:
         	this.DispenserMessages.add(thisLine);
         	break;
@@ -153,11 +195,11 @@ public class HeroicDeathMessages
     }
     catch (IOException e)
     {
-      WriteFile(dataFolder);
+      writeFile(dataFolder);
     }
   }
 
-  private void WriteFile(File dataFolder)
+  private void writeFile(File dataFolder)
   {
 	File messageFile = new File(dataFolder, this.location);
 	FileWriter writer = null;
@@ -245,6 +287,7 @@ public class HeroicDeathMessages
   public static enum ParseType
   {
     NONE, Drown, Cactus, Fire, Creeper, Explosion, 
-    Fall, PVP, Monster, Lava, Other, Suffocation, Dispenser;
+    Fall, PVP, Monster, Ghast, Slime, Zombie, PigZombie, 
+    Spider, Skeleton, Giant, Lava, Other, Suffocation, Dispenser;
   }
 }

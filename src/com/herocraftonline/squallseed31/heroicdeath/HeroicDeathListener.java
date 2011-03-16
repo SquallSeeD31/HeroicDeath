@@ -75,28 +75,28 @@ public class HeroicDeathListener extends EntityListener {
  }
  
  public String getAttackerName(Entity damager) {
-	 String attackerName = "Unknown";
+	 String attackerName = plugin.mobUnknown;
 	 if (damager instanceof Player) {
 		 Player attacker = (Player)damager;
 		 attackerName = attacker.getDisplayName();
 	 } else if (damager instanceof PigZombie) {
-		 attackerName = "Pig Zombie";
+		 attackerName = plugin.mobPigZombie;
 	 } else if (damager instanceof Giant) {
-		 attackerName = "Giant";
+		 attackerName = plugin.mobGiant;
 	 } else if (damager instanceof Zombie) {
-		 attackerName = "Zombie";
+		 attackerName = plugin.mobZombie;
 	 } else if (damager instanceof Skeleton) {
-		 attackerName = "Skeleton";
+		 attackerName = plugin.mobSkeleton;
 	 } else if (damager instanceof Spider) {
-		 attackerName = "Spider";
+		 attackerName = plugin.mobSpider;
 	 } else if (damager instanceof Creeper) {
-		 attackerName = "Creeper";
+		 attackerName = plugin.mobCreeper;
 	 } else if (damager instanceof Ghast) {
-		 attackerName = "Ghast";
+		 attackerName = plugin.mobGhast;
 	 } else if (damager instanceof Slime) {
-		 attackerName = "Slime";
+		 attackerName = plugin.mobSlime;
 	 } else {
-		 attackerName = "Monster";
+		 attackerName = plugin.mobMonster;
 	 }
 	 return attackerName;
  }
@@ -114,6 +114,7 @@ public class HeroicDeathListener extends EntityListener {
 			 return;
 		 }
 	 }
+	 player.getInventory().clear(); //This is to fix inventory dupe bug until 521
 	 String name = player.getName();
 	 DeathCertificate dc = deathRecords.remove(name);
 	 if (dc == null)
@@ -188,8 +189,22 @@ public class HeroicDeathListener extends EntityListener {
 					 killString = getMessage(HeroicDeath.DeathMessages.PVPMessages, dc);
 				 } else {
 					 dc.setAttacker(getAttackerName(damager));
-					 if (dc.getAttacker().equalsIgnoreCase("creeper"))
+					 if (dc.getAttacker().equalsIgnoreCase(plugin.mobCreeper) && !HeroicDeath.DeathMessages.CreeperExplosionMessages.isEmpty())
 						 killString = getMessage(HeroicDeath.DeathMessages.CreeperExplosionMessages, dc);
+					 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobGhast) && !HeroicDeath.DeathMessages.GhastMessages.isEmpty())
+						 killString = getMessage(HeroicDeath.DeathMessages.GhastMessages, dc);
+					 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobSlime) && !HeroicDeath.DeathMessages.SlimeMessages.isEmpty())
+						 killString = getMessage(HeroicDeath.DeathMessages.SlimeMessages, dc);
+					 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobZombie) && !HeroicDeath.DeathMessages.ZombieMessages.isEmpty())
+						 killString = getMessage(HeroicDeath.DeathMessages.ZombieMessages, dc);
+					 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobPigZombie) && !HeroicDeath.DeathMessages.PigZombieMessages.isEmpty())
+						 killString = getMessage(HeroicDeath.DeathMessages.PigZombieMessages, dc);
+					 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobSpider) && !HeroicDeath.DeathMessages.SpiderMessages.isEmpty())
+						 killString = getMessage(HeroicDeath.DeathMessages.SpiderMessages, dc);
+					 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobSkeleton) && !HeroicDeath.DeathMessages.SkeletonMessages.isEmpty())
+						 killString = getMessage(HeroicDeath.DeathMessages.SkeletonMessages, dc);
+					 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobGiant) && !HeroicDeath.DeathMessages.GiantMessages.isEmpty())
+						 killString = getMessage(HeroicDeath.DeathMessages.GiantMessages, dc);
 					 else
 						 killString = getMessage(HeroicDeath.DeathMessages.MonsterMessages, dc);
 				 }
