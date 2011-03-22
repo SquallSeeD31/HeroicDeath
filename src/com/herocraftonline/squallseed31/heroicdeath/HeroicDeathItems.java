@@ -5,7 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.bukkit.material.MaterialData;
 
@@ -15,7 +17,7 @@ import org.bukkit.material.MaterialData;
 //will be replaced with custom work later.
 public class HeroicDeathItems
 {
-  protected Map<String, MaterialData> HDItems = new HashMap<String, MaterialData>();
+  protected Map<MaterialData, String> HDItems = new HashMap<MaterialData, String>();
 
   private Object itemLock = new Object();
   private String location = "heroicdeath.items";
@@ -293,7 +295,7 @@ public class HeroicDeathItems
     }
     
     synchronized (this.itemLock) {
-      this.HDItems = new HashMap<String, MaterialData>();
+      this.HDItems = new HashMap<MaterialData, String>();
       try {
         Scanner scanner = new Scanner(itemFile);
         while (scanner.hasNextLine()) {
@@ -316,7 +318,7 @@ public class HeroicDeathItems
         		  data = 0;
         	  }
           }
-          this.HDItems.put(name, new MaterialData(type, data));
+          this.HDItems.put(new MaterialData(type, data), name);
         }
         scanner.close();
       } catch (Exception e) {
@@ -329,11 +331,9 @@ public class HeroicDeathItems
 	  int iType = item.getItemTypeId();
 	  byte iData = item.getData();
     synchronized (this.itemLock) {
-      for (String name : this.HDItems.keySet()) {
-        if (this.HDItems.get(name).getItemTypeId() == iType && this.HDItems.get(name).getData() == iData) {
-          return name;
-        }
-      }
+      for (Entry<MaterialData, String> entry : this.HDItems.entrySet())
+    	  if (entry.getKey().getItemTypeId() == iType && entry.getKey().getData() == iData)
+    		  return entry.getValue();
     }
     return friendlyName(item.getItemType().toString());
   }
