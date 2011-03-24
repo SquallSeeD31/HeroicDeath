@@ -64,7 +64,7 @@ public class HeroicDeath extends JavaPlugin
 	version = pdfFile.getVersion();
 	dataFolder = getDataFolder();
     PluginManager pm = getServer().getPluginManager();
-    pm.registerEvent(Event.Type.ENTITY_DAMAGE, this.listener, Event.Priority.Monitor, this);
+    pm.registerEvent(Event.Type.ENTITY_DAMAGED, this.listener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.ENTITY_DEATH, this.listener, Event.Priority.Monitor, this);
 
     messageColor = getConfigColor("colors.message", "RED");

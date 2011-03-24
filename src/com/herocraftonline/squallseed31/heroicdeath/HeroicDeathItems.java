@@ -330,12 +330,16 @@ public class HeroicDeathItems
   public String getItem(MaterialData item) {
 	  int iType = item.getItemTypeId();
 	  byte iData = item.getData();
+	  String genericMatch = null;
     synchronized (this.itemLock) {
-      for (Entry<MaterialData, String> entry : this.HDItems.entrySet())
+      for (Entry<MaterialData, String> entry : this.HDItems.entrySet()) {
     	  if (entry.getKey().getItemTypeId() == iType && entry.getKey().getData() == iData)
     		  return entry.getValue();
+    	  if (entry.getKey().getItemTypeId() == iType && entry.getKey().getData() == 0)
+    		  genericMatch = entry.getValue();
+      }
     }
-    return friendlyName(item.getItemType().toString());
+    return (genericMatch == null) ? friendlyName(item.getItemType().toString()) : genericMatch;
   }
   
   public String friendlyName(String rawName) {
