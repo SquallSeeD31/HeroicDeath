@@ -12,6 +12,10 @@
         <include>COPYING*</include>
       </includes>
     </fileSet>
+    <fileSet>
+    	<directory>${project.basedir}/HeroicDeath/</directory>
+    	<outputDirectory>/HeroicDeath/</outputDirectory>
+    </fileSet>
   </fileSets>
   <files>
   	<file>

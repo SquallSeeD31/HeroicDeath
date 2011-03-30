@@ -1,0 +1,46 @@
+#This file contains custom messages for death events.
+#You can specify as many messages as you want (within reason) for each death type.
+#Just be sure each message is on a new line under the appropriate label.
+#When a player dies, a random message from the appropriate label is chosen.
+#Accepted variables:
+# - %d holds the name of the dead player.
+# - %a holds the name of the attacking entity (player or monster) for PVP and Monster deaths.
+# - %i holds the name of the attacking player's current item for PVP deaths.
+#Custom item names may be defined in the 'heroicdeath.items' file.
+:Drown
+%d drowned
+%d is swimming with the fishes
+%d took a long walk off a short pier
+:Cactus
+%d died to a cactus
+%d poked a cactus, but the cactus poked back
+:Fire
+%d burned to death
+%d forgot how to stop, drop and roll
+:Explosion
+%d apparently has an explosive personality
+%d exploded
+:Creeper
+%d was creeper bombed
+%d hugged a creeper
+:Fall
+%d fell to their death
+%d took a leap of faith
+:PVP
+%a killed %d wielding %i
+:Void
+%d fell into the Gap
+:Monsters
+%d was killed by an angry %a
+:Lava
+%d was killed by lava
+%d became obsidian
+%d took a bath in a lake of fire
+:Other
+%d died from unknown causes
+%d was killed by Herobrine
+:Suffocation
+%d suffocated
+:Dispenser
+%d did not need a dispenser there.
+%d got shot by a dispenser.

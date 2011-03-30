@@ -1,0 +1,243 @@
+#This file contains custom names for the item a PvP killer is holding
+#The names here will be replaced in the %i marker for PvP deaths
+#File Usage:
+#NAME:ID:(optional)DATA
+#The DATA parameter is optional, and refers to materials with multiple states
+#Such as colored dyes and wool.
+#Item IDs and data values may be found on the Minecraft Wiki
+#If a mapping is not provided for an item in this file, a default name will be used automatically.
+fists:0:-0x1
+stone:1
+grass:2
+dirt:3
+cobblestone:4
+wood:5
+sapling:6
+bedrock:7
+water:8
+stationary water:9
+lava:10
+stationary lava:11
+sand:12
+gravel:13
+gold ore:14
+iron ore:15
+coal ore:16
+log:17:0x0
+redwood:17:0x1
+birch:17:0x2
+leaves:18
+sponge:19
+glass:20
+lapis ore:21
+lapis block:22
+dispenser:23
+sandstone:24
+note block:25
+bed block:26
+wool:35:0x0
+white wool:35:0x0
+orange wool:35:0x1
+magenta wool:35:0x2
+light blue wool:35:0x3
+yellow wool:35:0x4
+light green wool:35:0x5
+pink wool:35:0x6
+grey wool:35:0x7
+gray wool:35:0x7
+light gray wool:35:0x8
+cyan wool:35:0x9
+purple wool:35:0xa
+blue wool:35:0xb
+brown wool:35:0xc
+dark green wool:35:0xd
+red wool:35:0xe
+black wool:35:0xf
+flower:37
+yellow flower:37
+rose:38
+red flower:38
+red rose:38
+brown mushroom:39
+red mushroom:40
+gold block:41
+iron block:42
+stone double slab:43:0x0
+sandstone double slab:43:0x1
+wooden double slab:43:0x2
+cobblestone double slab:43:0x3
+stone slab:44:0x0
+sandstone slab:44:0x1
+wooden slab:44:0x2
+cobblestone slab:44:0x3
+brick block:45
+TNT:46
+bookshelf:47
+mossy cobblestone:48
+obsidian:49
+torch:50
+fire:51
+mob spawner:52
+wood stairs:53
+chest:54
+redstone wire:55
+diamond ore:56
+diamond block:57
+workbench:58
+crops:59
+soil:60
+furnace:61
+burning furnace:62
+sign post:63
+wooden door:64
+ladder:65
+tracks:66
+cobblestone stairs:67
+wall sign:68
+lever:69
+stone plate:70
+iron door block:71
+wood plate:72
+redstone ore:73
+glowing redstone ore:74
+redstone torch:75
+redstone torch:76
+stone button:77
+snow:78
+ice:79
+snow block:80
+cactus:81
+clay block:82
+sugar cane block:83
+jukebox:84
+fence:85
+pumpkin:86
+netherrack:87
+soul sand:88
+glowstone:89
+portal:90
+jack o lantern:91
+off redstone repeater:93
+on redstone repeater:94
+iron shovel:256
+iron pickaxe:257
+iron axe:258
+flint & steel:259
+apple:260
+bow & arrow:261
+arrow:262
+coal:263:0x0
+charcoal:263:0x1
+diamond:264
+iron bar:265
+gold bar:266
+iron sword:267
+wooden sword:268
+wooden shovel:269
+wooden pickaxe:270
+wooden pick:270
+wooden axe:271
+stone sword:272
+stone shovel:273
+stone pickaxe:274
+stone axe:275
+diamond sword:276
+diamond shovel:277
+diamond pickaxe:278
+diamond axe:279
+stick:280
+bowl:281
+soup bowl:282
+gold sword:283
+gold shovel:284
+gold pickaxe:285
+gold axe:286
+string:287
+feather:288
+sulfur:289
+wood hoe:290
+stone hoe:291
+iron hoe:292
+diamond hoe:293
+gold hoe:294
+seeds:295
+wheat:296
+bread:297
+leather helmet:298
+leather chestplate:299
+leather pants:300
+leather boots:301
+chainmail helmet:302
+chainmail chestplate:303
+chainmail pants:304
+chainmail boots:305
+iron helmet:306
+iron chestplate:307
+iron pants:308
+iron boots:309
+diamond helmet:310
+diamond chestplate:311
+diamond pants:312
+diamond boots:313
+gold helmet:314
+gold chestplate:315
+gold pants:316
+gold boots:317
+flint:318
+raw porkchop:319
+cooked pork:320
+painting:321
+golden apple:322
+sign:323
+wood door:324
+bucket:325
+water bucket:326
+lava bucket:327
+minecart:328
+saddle:329
+iron door:330
+redstone dust:331
+snowball:332
+boat:333
+leather:334
+milk bucket:335
+brick:336
+clay:337
+reed:338
+paper:339
+book:340
+slimeorb:341
+storage minecart:342
+powered minecart:343
+egg:344
+compass:345
+fishing rod:346
+watch:347
+lightstone dust:348
+light dust:348
+raw fish:349
+fish:349
+cooked fish:350
+ink sack:351:0x0
+rose red:351:0x1
+cactus green:351:0x2
+coco beans:351:0x3
+lapis lazuli:351:0x4
+purple dye:351:0x5
+cyan dye:351:0x6
+light gray dye:351:0x7
+gray dye:351:0x8
+pink dye:351:0x9
+lime dye:351:0xa
+dandelion yellow:351:0xb
+light blue dye:351:0xc
+magenta dye:351:0xd
+orange dye:351:0xe
+bone meal:351:0xf
+bone:352
+sugar:353
+cake:354
+bed:355
+redstone repeater:356
+gold record:2256
+green record:2257
