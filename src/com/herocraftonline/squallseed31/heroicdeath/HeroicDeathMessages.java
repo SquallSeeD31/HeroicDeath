@@ -18,6 +18,7 @@ public class HeroicDeathMessages
   public ArrayList<String> CreeperExplosionMessages = new ArrayList<String>();
   public ArrayList<String> FallMessages = new ArrayList<String>();
   public ArrayList<String> PVPMessages = new ArrayList<String>();
+  public ArrayList<String> VoidMessages = new ArrayList<String>();
   public ArrayList<String> MonsterMessages = new ArrayList<String>();
   public ArrayList<String> GhastMessages = new ArrayList<String>();
   public ArrayList<String> SlimeMessages = new ArrayList<String>();
@@ -57,6 +58,8 @@ public class HeroicDeathMessages
       this.FallMessages.add("%d fell to their death");
     if (this.PVPMessages.size() == 0)
       this.PVPMessages.add("%a killed %d wielding %i");
+    if (this.VoidMessages.size() == 0)
+      this.VoidMessages.add("%d fell into the Gap");
     if (this.MonsterMessages.size() == 0)
       this.MonsterMessages.add("%d was killed by an angry %a");
     if (this.LavaMessages.size() == 0)
@@ -100,6 +103,8 @@ public class HeroicDeathMessages
           currentParse = HeroicDeathMessages.ParseType.Fall;
         else if (thisLine.toLowerCase().equals(":pvp"))
           currentParse = HeroicDeathMessages.ParseType.PVP;
+        else if (thisLine.toLowerCase().equals(":void"))
+          currentParse = HeroicDeathMessages.ParseType.Void;
         else if (thisLine.toLowerCase().equals(":monsters"))
           currentParse = HeroicDeathMessages.ParseType.Monster;
         else if (thisLine.toLowerCase().equals(":ghast"))
@@ -151,6 +156,9 @@ public class HeroicDeathMessages
           case PVP:
             this.PVPMessages.add(thisLine);
             break;
+          case Void:
+        	this.VoidMessages.add(thisLine);
+        	break;
           case Monster:
             this.MonsterMessages.add(thisLine);
             break;
@@ -236,6 +244,8 @@ public class HeroicDeathMessages
       writer.write("%d took a leap of faith\r\n");
       writer.write(":PVP\r\n");
       writer.write("%a killed %d wielding %i\r\n");
+      writer.write(":Void\r\n");
+      writer.write("%d fell into the Gap\r\n");
       writer.write(":Monsters\r\n");
       writer.write("%d was killed by an angry %a\r\n");
       writer.write(":Lava\r\n");
@@ -277,6 +287,7 @@ public class HeroicDeathMessages
     this.CreeperExplosionMessages.add("%d was creeper bombed");
     this.FallMessages.add("%d fell to their death");
     this.PVPMessages.add("%a killed %d wielding %i");
+    this.VoidMessages.add("%d fell into the Gap");
     this.MonsterMessages.add("%d was killed by an angry %a");
     this.LavaMessages.add("%d was killed by lava");
     this.OtherMessages.add("%d died from unknown causes");
@@ -287,7 +298,7 @@ public class HeroicDeathMessages
   public static enum ParseType
   {
     NONE, Drown, Cactus, Fire, Creeper, Explosion, 
-    Fall, PVP, Monster, Ghast, Slime, Zombie, PigZombie, 
+    Fall, PVP, Void, Monster, Ghast, Slime, Zombie, PigZombie, 
     Spider, Skeleton, Giant, Lava, Other, Suffocation, Dispenser;
   }
 }

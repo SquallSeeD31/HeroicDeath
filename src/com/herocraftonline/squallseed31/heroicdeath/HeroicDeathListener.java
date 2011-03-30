@@ -234,6 +234,8 @@ public class HeroicDeathListener extends EntityListener {
 			case SUFFOCATION:
 				killString = getMessage(HeroicDeath.DeathMessages.SuffocationMessages, dc);
 				break;
+			case VOID:
+				killString = getMessage(HeroicDeath.DeathMessages.VoidMessages, dc);
 			default:
 			{
 				killString = getMessage(HeroicDeath.DeathMessages.OtherMessages, dc);
