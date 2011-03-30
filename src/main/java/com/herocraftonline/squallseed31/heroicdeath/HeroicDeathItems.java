@@ -12,6 +12,7 @@ import java.util.Set;
 import org.bukkit.material.MaterialData;
 
 
+
 //Again, this persistence format is hard-coded, and was taken
 //from the previous developer of DeathNotify
 //will be replaced with custom work later.
