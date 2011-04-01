@@ -10,6 +10,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Spider;
+import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -96,6 +97,8 @@ public class HeroicDeathListener extends EntityListener {
 		 attackerName = plugin.mobGhast;
 	 } else if (damager instanceof Slime) {
 		 attackerName = plugin.mobSlime;
+	 } else if (damager instanceof Wolf) {
+		 attackerName = plugin.mobWolf;
 	 } else {
 		 attackerName = plugin.mobMonster;
 	 }
@@ -206,6 +209,8 @@ public class HeroicDeathListener extends EntityListener {
 						 killString = getMessage(HeroicDeath.DeathMessages.SkeletonMessages, dc);
 					 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobGiant) && !HeroicDeath.DeathMessages.GiantMessages.isEmpty())
 						 killString = getMessage(HeroicDeath.DeathMessages.GiantMessages, dc);
+					 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobWolf) && !HeroicDeath.DeathMessages.WolfMessages.isEmpty())
+						 killString = getMessage(HeroicDeath.DeathMessages.WolfMessages, dc);
 					 else
 						 killString = getMessage(HeroicDeath.DeathMessages.MonsterMessages, dc);
 				 }

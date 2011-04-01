@@ -119,6 +119,7 @@ portal:90
 jack o lantern:91
 off redstone repeater:93
 on redstone repeater:94
+locked chest:95
 iron shovel:256
 iron pickaxe:257
 iron axe:258
@@ -239,5 +240,6 @@ sugar:353
 cake:354
 bed:355
 redstone repeater:356
+cookie:357
 gold record:2256
 green record:2257

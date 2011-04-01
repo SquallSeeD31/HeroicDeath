@@ -151,6 +151,7 @@ public class HeroicDeathItems
         writer.write("jack o lantern:91\r\n");
         writer.write("off redstone repeater:93\r\n");
         writer.write("on redstone repeater:94\r\n");
+        writer.write("locked chest:95\r\n");
         writer.write("iron shovel:256\r\n");
         writer.write("iron pickaxe:257\r\n");
         writer.write("iron axe:258\r\n");
@@ -271,6 +272,7 @@ public class HeroicDeathItems
         writer.write("cake:354\r\n");
         writer.write("bed:355\r\n");
         writer.write("redstone repeater:356\r\n");
+        writer.write("cookie:357\r\n");
         writer.write("gold record:2256\r\n");
         writer.write("green record:2257\r\n");
       } catch (Exception e) {

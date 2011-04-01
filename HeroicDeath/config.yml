@@ -15,6 +15,7 @@ monsters:
     skeleton: Skeleton
     unknown: Unknown
     giant: Giant
+    wolf: Wolf
 log:
     files:
         data: death_data.log

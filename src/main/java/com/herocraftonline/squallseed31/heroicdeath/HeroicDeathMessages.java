@@ -28,6 +28,7 @@ public class HeroicDeathMessages
   public ArrayList<String> SpiderMessages = new ArrayList<String>();
   public ArrayList<String> SkeletonMessages = new ArrayList<String>();
   public ArrayList<String> GiantMessages = new ArrayList<String>();
+  public ArrayList<String> WolfMessages = new ArrayList<String>();
   public ArrayList<String> LavaMessages = new ArrayList<String>();
   public ArrayList<String> SuffocationMessages = new ArrayList<String>();
   public ArrayList<String> DispenserMessages = new ArrayList<String>();
@@ -122,6 +123,8 @@ public class HeroicDeathMessages
             currentParse = HeroicDeathMessages.ParseType.Skeleton;
         else if (thisLine.toLowerCase().equals(":giant"))
             currentParse = HeroicDeathMessages.ParseType.Giant;
+        else if (thisLine.toLowerCase().equals(":wolf"))
+        	currentParse = HeroicDeathMessages.ParseType.Wolf;
         else if (thisLine.toLowerCase().equals(":lava"))
           currentParse = HeroicDeathMessages.ParseType.Lava;
         else if (thisLine.toLowerCase().equals(":other"))
@@ -171,6 +174,9 @@ public class HeroicDeathMessages
             break;
           case Ghast:
         	this.GhastMessages.add(thisLine);
+        	break;
+          case Wolf:
+        	this.WolfMessages.add(thisLine);
         	break;
           case Slime:
         	  this.SlimeMessages.add(thisLine);
@@ -300,6 +306,6 @@ public class HeroicDeathMessages
   {
     NONE, Drown, Cactus, Fire, Creeper, Explosion, 
     Fall, PVP, Void, Monster, Ghast, Slime, Zombie, PigZombie, 
-    Spider, Skeleton, Giant, Lava, Other, Suffocation, Dispenser;
+    Spider, Skeleton, Giant, Wolf, Lava, Other, Suffocation, Dispenser;
   }
 }

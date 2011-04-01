@@ -51,6 +51,7 @@ public class HeroicDeath extends JavaPlugin
 	public String mobGhast;
 	public String mobSlime;
 	public String mobGiant;
+	public String mobWolf;
 
 	public static String timestampFormat;
 	
@@ -88,6 +89,7 @@ public class HeroicDeath extends JavaPlugin
     mobGhast = this.config.getString("monsters.ghast", "Ghast");
     mobSlime = this.config.getString("monsters.slime", "Slime");
     mobGiant = this.config.getString("monsters.giant", "Giant");
+    mobWolf = this.config.getString("monsters.wolf", "Wolf");
 
     saveConfig();
     try {
@@ -214,6 +216,7 @@ public class HeroicDeath extends JavaPlugin
 	  this.config.setProperty("monsters.ghast", mobGhast);
 	  this.config.setProperty("monsters.slime", mobSlime);
 	  this.config.setProperty("monsters.giant", mobGiant);
+	  this.config.setProperty("monsters.wolf", mobWolf);
 
 	  this.config.save();
   }
