@@ -2,6 +2,7 @@ package com.herocraftonline.squallseed31.heroicdeath;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.PigZombie;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Spider;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
@@ -179,9 +181,6 @@ public class HeroicDeathListener extends EntityListener {
 			 }
 		 }
 		 switch (event.getCause()) {
-		 	case ENTITY_EXPLOSION:
-		 		killString = getMessage(HeroicDeath.DeathMessages.CreeperExplosionMessages, dc);
-		 		break;
 		 	case ENTITY_ATTACK:
 		 		 if (damager == null) {
 					 dc.setAttacker("Dispenser");
@@ -217,6 +216,18 @@ public class HeroicDeathListener extends EntityListener {
 		 		break;
 		 	case BLOCK_EXPLOSION:
 		 		killString = getMessage(HeroicDeath.DeathMessages.ExplosionMessages, dc);
+		 		break;
+		 	case ENTITY_EXPLOSION:
+		 		if (damager instanceof TNTPrimed)
+		 			killString = getMessage(HeroicDeath.DeathMessages.ExplosionMessages, dc);
+		 		else if (damager instanceof Fireball) {
+		 			dc.setAttacker(plugin.mobGhast);
+		 			killString = getMessage(HeroicDeath.DeathMessages.GhastMessages, dc);
+		 		}
+		 		else {
+		 			dc.setAttacker(plugin.mobCreeper);
+		 			killString = getMessage(HeroicDeath.DeathMessages.CreeperExplosionMessages, dc);
+		 		}
 		 		break;
 		 	case CONTACT:
 				 dc.setAttacker(blockName);
