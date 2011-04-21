@@ -78,17 +78,11 @@ public class HeroicDeathMessages
   {
     try
     {
-      BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(dataFolder, this.location)), "ISO-8859-1"));
+      BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(dataFolder, this.location))));
       HeroicDeathMessages.ParseType currentParse = HeroicDeathMessages.ParseType.NONE;
       String thisLine;
       while ((thisLine = reader.readLine()) != null)
       {
-        try {
-          thisLine = new String(thisLine.getBytes("ISO-8859-1"), "ISO-8859-1").trim();
-        }
-        catch (UnsupportedEncodingException localUnsupportedEncodingException)
-        {
-        }
         if ((thisLine.contains("#")) || (thisLine.equals("")))
           continue;
         if (thisLine.toLowerCase().equals(":drown"))

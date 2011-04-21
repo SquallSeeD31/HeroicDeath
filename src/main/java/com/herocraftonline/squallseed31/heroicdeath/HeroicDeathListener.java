@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -120,7 +121,6 @@ public class HeroicDeathListener extends EntityListener {
 			 return;
 		 }
 	 }
-	 player.getInventory().clear(); //This is to fix inventory dupe bug until 521
 	 String name = player.getName();
 	 DeathCertificate dc = deathRecords.remove(name);
 	 if (dc == null)
@@ -131,7 +131,7 @@ public class HeroicDeathListener extends EntityListener {
 	 	 dc.setMessage(killString);
 	 }
 	 if(!plugin.getEventsOnly()){
-		 plugin.getServer().broadcastMessage(HeroicDeath.messageColor + killString + " ");
+		plugin.getServer().broadcastMessage(HeroicDeath.messageColor + killString + " ");
 	 }
 	 HeroicDeath.log.info(killString.replaceAll("(?i)\u00A7[0-F]", ""));
 	 plugin.recordDeath(dc);

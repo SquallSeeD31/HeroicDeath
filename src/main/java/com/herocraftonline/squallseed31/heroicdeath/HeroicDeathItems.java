@@ -44,7 +44,12 @@ public class HeroicDeathItems
         writer.write("dirt:3\r\n");
         writer.write("cobblestone:4\r\n");
         writer.write("wood:5\r\n");
-        writer.write("sapling:6\r\n");
+        writer.write("sapling:6:0x0\r\n");
+        writer.write("oak sapling:6:0x0\r\n");
+        writer.write("spruce sapling:6:0x1\r\n");
+        writer.write("pine sapling:6:0x1\r\n");
+        writer.write("redwood sapling:6:0x1\r\n");
+        writer.write("birch sapling:6:0x2\r\n");
         writer.write("bedrock:7\r\n");
         writer.write("water:8\r\n");
         writer.write("stationary water:9\r\n");
@@ -56,6 +61,9 @@ public class HeroicDeathItems
         writer.write("iron ore:15\r\n");
         writer.write("coal ore:16\r\n");
         writer.write("log:17:0x0\r\n");
+        writer.write("oak:17:0x0\r\n");
+        writer.write("spruce:17:0x1\r\n");
+        writer.write("pine:17:0x1\r\n");
         writer.write("redwood:17:0x1\r\n");
         writer.write("birch:17:0x2\r\n");
         writer.write("leaves:18\r\n");
@@ -67,6 +75,9 @@ public class HeroicDeathItems
         writer.write("sandstone:24\r\n");
         writer.write("note block:25\r\n");
         writer.write("bed block:26\r\n");
+        writer.write("powered rail:27\r\n");
+        writer.write("detector rail:28\r\n");
+        writer.write("web:30\r\n");
         writer.write("wool:35:0x0\r\n");
         writer.write("white wool:35:0x0\r\n");
         writer.write("orange wool:35:0x1\r\n");

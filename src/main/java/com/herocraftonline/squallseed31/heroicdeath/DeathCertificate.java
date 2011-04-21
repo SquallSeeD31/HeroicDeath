@@ -106,7 +106,7 @@ public class DeathCertificate {
 		double x = Math.round(location.getX());
 		double y = Math.round(location.getY());
 		double z = Math.round(location.getZ());
-		String loc = "(" + x + "," + y + "," + z + ")";
+		String loc = location.getWorld().getName() + " (" + x + "," + y + "," + z + ")";
 		String mWeapon = "";
 		if (murderWeapon != null) {
 			byte mData = murderWeapon.getData();

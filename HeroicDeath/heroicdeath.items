@@ -12,7 +12,12 @@ grass:2
 dirt:3
 cobblestone:4
 wood:5
-sapling:6
+sapling:6:0x0
+oak sapling:6:0x0
+spruce sapling:6:0x1
+pine sapling:6:0x1
+redwood sapling:6:0x1
+birch sapling:6:0x2
 bedrock:7
 water:8
 stationary water:9
@@ -24,6 +29,9 @@ gold ore:14
 iron ore:15
 coal ore:16
 log:17:0x0
+oak:17:0x0
+spruce:17:0x1
+pine:17:0x1
 redwood:17:0x1
 birch:17:0x2
 leaves:18
@@ -35,6 +43,9 @@ dispenser:23
 sandstone:24
 note block:25
 bed block:26
+powered rail:27
+detector rail:28
+web:30
 wool:35:0x0
 white wool:35:0x0
 orange wool:35:0x1
