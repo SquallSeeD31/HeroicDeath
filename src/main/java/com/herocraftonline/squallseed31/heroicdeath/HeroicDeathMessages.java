@@ -32,6 +32,7 @@ public class HeroicDeathMessages
   public ArrayList<String> LavaMessages = new ArrayList<String>();
   public ArrayList<String> SuffocationMessages = new ArrayList<String>();
   public ArrayList<String> DispenserMessages = new ArrayList<String>();
+  public ArrayList<String> LightningMessages = new ArrayList<String>();
   public ArrayList<String> OtherMessages = new ArrayList<String>();
   private String location = "heroicdeath.messages";
 
@@ -70,6 +71,8 @@ public class HeroicDeathMessages
     	this.SuffocationMessages.add("%d suffocated.");
     if (this.DispenserMessages.size() == 0)
     	this.DispenserMessages.add("%d got shot by a dispenser.");
+    if (this.LightningMessages.size() == 0)
+    	this.LightningMessages.add("%d got electrocuted.");
     if (this.OtherMessages.size() == 0)
       this.OtherMessages.add("%d died from unknown causes");
   }
@@ -125,6 +128,8 @@ public class HeroicDeathMessages
           currentParse = HeroicDeathMessages.ParseType.Other;
         else if (thisLine.toLowerCase().equals(":dispenser"))
         	currentParse = HeroicDeathMessages.ParseType.Dispenser;
+        else if (thisLine.toLowerCase().equals(":lightning"))
+        	currentParse = HeroicDeathMessages.ParseType.Lightning;
         else if (thisLine.toLowerCase().equals(":suffocation")) {
           currentParse = HeroicDeathMessages.ParseType.Suffocation;
         }
@@ -192,6 +197,9 @@ public class HeroicDeathMessages
         	  break;
           case Dispenser:
         	this.DispenserMessages.add(thisLine);
+        	break;
+          case Lightning:
+        	this.LightningMessages.add(thisLine);
         	break;
           case Suffocation:
         	this.SuffocationMessages.add(thisLine);
@@ -261,6 +269,10 @@ public class HeroicDeathMessages
       writer.write(":Dispenser\r\n");
       writer.write("%d did not need a dispenser there.\r\n");
       writer.write("%d got shot by a dispenser.\r\n");
+      writer.write(":Lightning\r\n");
+      writer.write("%d got electrocuted.\r\n");
+      writer.write("%d has an electrifying personality.\r\n");
+      writer.write("%d made a suitable ground.\r\n");
 	} catch (Exception e) {
 		  HeroicDeath.log.info("Exception while creating " + this.location + " " + e.toString());
 	  if (writer != null)
@@ -294,12 +306,13 @@ public class HeroicDeathMessages
     this.OtherMessages.add("%d died from unknown causes");
     this.SuffocationMessages.add("%d suffocated.");
     this.DispenserMessages.add("%d got shot by a dispenser.");
+    this.LightningMessages.add("%d got electrocuted.");
   }
 
   public static enum ParseType
   {
     NONE, Drown, Cactus, Fire, Creeper, Explosion, 
     Fall, PVP, Void, Monster, Ghast, Slime, Zombie, PigZombie, 
-    Spider, Skeleton, Giant, Wolf, Lava, Other, Suffocation, Dispenser;
+    Spider, Skeleton, Giant, Wolf, Lava, Other, Suffocation, Dispenser, Lightning;
   }
 }

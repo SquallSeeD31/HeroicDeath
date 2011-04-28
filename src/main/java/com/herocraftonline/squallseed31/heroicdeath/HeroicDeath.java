@@ -193,7 +193,6 @@ public class HeroicDeath extends JavaPlugin
 				e.printStackTrace();
 			}
 	  }
-	  this.getServer().getPluginManager().callEvent(new HeroicDeathEvent(dc));
   }
   
   private void saveConfig() {

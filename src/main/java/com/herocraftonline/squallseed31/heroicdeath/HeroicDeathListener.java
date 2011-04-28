@@ -110,17 +110,10 @@ public class HeroicDeathListener extends EntityListener {
  
  public void onEntityDeath(EntityDeathEvent event) {
 	 Player player;
-	 if (!(event.getEntity() instanceof Player)) {
+	 if (!(event.getEntity() instanceof Player))
 		 return;
-	 } else {
-		 try {
-			 player = (Player)event.getEntity();
-		 } catch (ClassCastException e)
-		 {
-			 HeroicDeath.log.severe("Cannot cast entity as player: " + e);
-			 return;
-		 }
-	 }
+	 else
+		 player = (Player)event.getEntity();
 	 String name = player.getName();
 	 DeathCertificate dc = deathRecords.remove(name);
 	 if (dc == null)
@@ -130,10 +123,12 @@ public class HeroicDeathListener extends EntityListener {
 		 killString = getMessage(HeroicDeath.DeathMessages.OtherMessages, dc);
 	 	 dc.setMessage(killString);
 	 }
+	 HeroicDeathEvent hde = new HeroicDeathEvent(dc);
+	 plugin.getServer().getPluginManager().callEvent(hde);
 	 if(!plugin.getEventsOnly()){
-		plugin.getServer().broadcastMessage(HeroicDeath.messageColor + killString + " ");
+		plugin.getServer().broadcastMessage(HeroicDeath.messageColor + dc.getMessage() + " ");
 	 }
-	 HeroicDeath.log.info(killString.replaceAll("(?i)\u00A7[0-F]", ""));
+	 HeroicDeath.log.info("[HeroicDeath]" + dc.getMessage().replaceAll("(?i)\u00A7[0-F]", ""));
 	 plugin.recordDeath(dc);
  }
  
@@ -253,12 +248,15 @@ public class HeroicDeathListener extends EntityListener {
 				break;
 			case VOID:
 				killString = getMessage(HeroicDeath.DeathMessages.VoidMessages, dc);
+				break;
+			case LIGHTNING:
+				killString = getMessage(HeroicDeath.DeathMessages.LightningMessages, dc);
+				break;
 			default:
 			{
 				killString = getMessage(HeroicDeath.DeathMessages.OtherMessages, dc);
 			}
 		 }
-
 		 dc.setMessage(killString);
 		 deathRecords.put(name, dc);
 	 }

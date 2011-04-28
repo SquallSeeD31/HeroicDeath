@@ -15,5 +15,4 @@ public class HeroicDeathEvent extends Event {
 	public DeathCertificate getDeathCertificate() {
 		return dc;
 	}
-
 }
