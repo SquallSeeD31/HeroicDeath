@@ -6,19 +6,26 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.config.Configuration;
 
+import com.herocraftonline.squallseed31.heroicdeath.HeroicDeathListener.RespawnListener;
+
 public class HeroicDeath extends JavaPlugin
 {
 	public static final Logger log = Logger.getLogger("Minecraft");
 	
 	private final HeroicDeathListener listener = new HeroicDeathListener(this);
+	private final RespawnListener playerListener = listener.new RespawnListener();
 	
 	public PluginDescriptionFile pdfFile;
 	public String name;
@@ -52,6 +59,10 @@ public class HeroicDeath extends JavaPlugin
 	public String mobSlime;
 	public String mobGiant;
 	public String mobWolf;
+	public static boolean useDisplayName;
+	public boolean serverBroadcast;
+	public List<String> quietWorlds;
+	public List<String> loudWorlds;
 
 	public static String timestampFormat;
 	
@@ -68,6 +79,8 @@ public class HeroicDeath extends JavaPlugin
     PluginManager pm = getServer().getPluginManager();
     pm.registerEvent(Event.Type.ENTITY_DAMAGE, this.listener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.ENTITY_DEATH, this.listener, Event.Priority.Monitor, this);
+    pm.registerEvent(Event.Type.PLAYER_RESPAWN, this.playerListener, Event.Priority.Monitor, this);
+    pm.registerEvent(Event.Type.PLAYER_QUIT, this.playerListener, Event.Priority.Monitor, this);
 
     messageColor = getConfigColor("colors.message", "RED");
     nameColor = getConfigColor("colors.name", "DARK_AQUA");
@@ -90,7 +103,11 @@ public class HeroicDeath extends JavaPlugin
     mobSlime = this.config.getString("monsters.slime", "Slime");
     mobGiant = this.config.getString("monsters.giant", "Giant");
     mobWolf = this.config.getString("monsters.wolf", "Wolf");
-
+    useDisplayName = this.config.getBoolean("options.useDisplayName", false);
+    serverBroadcast = this.config.getBoolean("options.serverBroadcast", true);
+    quietWorlds = this.config.getStringList("options.worlds.quiet", new ArrayList<String>());
+    loudWorlds = this.config.getStringList("options.worlds.loud", new ArrayList<String>());
+    
     saveConfig();
     try {
     	if (logData)
@@ -169,7 +186,7 @@ public class HeroicDeath extends JavaPlugin
   
   public void recordDeath(DeathCertificate dc) {
 	  if (logData) {
-		  try {
+		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(this.dataLog,true));
 			writer.write(dc.toString());
 			writer.newLine();
@@ -216,8 +233,17 @@ public class HeroicDeath extends JavaPlugin
 	  this.config.setProperty("monsters.slime", mobSlime);
 	  this.config.setProperty("monsters.giant", mobGiant);
 	  this.config.setProperty("monsters.wolf", mobWolf);
+	  this.config.setProperty("options.useDisplayName", useDisplayName);
+	  this.config.setProperty("options.serverBroadcast", serverBroadcast);
+	  this.config.setProperty("options.worlds.quiet", quietWorlds);
+	  this.config.setProperty("options.worlds.loud", loudWorlds);
 
 	  this.config.save();
+  }
+  
+  public static String getPlayerName(Player p) {
+	  if (useDisplayName) return p.getDisplayName();
+	  return p.getName();
   }
   
   public static void debug(String message) {
@@ -225,4 +251,35 @@ public class HeroicDeath extends JavaPlugin
 		  log.info(message);
 	  }
   }
+
+	public void broadcast(DeathCertificate dc) {
+		if (!serverBroadcast) {
+			if (!quietWorlds.contains(dc.getLocation().getWorld().getName())) {
+				for (Player p : dc.getLocation().getWorld().getPlayers()) {
+					p.sendMessage(HeroicDeath.messageColor + dc.getMessage() + " ");
+				}
+			}
+			if (!loudWorlds.isEmpty()) {
+				for (String s : loudWorlds) {
+					World w = getServer().getWorld(s);
+					if (w == null || w.getName() == dc.getLocation().getWorld().getName()) continue;
+					for (Player p : w.getPlayers()) {
+						p.sendMessage(HeroicDeath.messageColor + dc.getMessage() + " ");
+					}
+				}
+			}
+		} else {
+			if (!quietWorlds.isEmpty()) {
+				for (World w : getServer().getWorlds()) {
+					if (!quietWorlds.contains(w.getName())) {
+						for (Player p : w.getPlayers()) {
+							p.sendMessage(HeroicDeath.messageColor + dc.getMessage() + " ");
+						}
+					}
+				}
+			} else {
+				getServer().broadcastMessage(HeroicDeath.messageColor + dc.getMessage() + " ");
+			}
+		}
+	}
 }

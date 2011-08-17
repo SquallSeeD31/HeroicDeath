@@ -1,10 +1,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.herocraftonline.squallseed31.heroicdeath</groupId>
-  <version>1.8.0</version>
+  <groupId>com.herocraftonline.squallseed31</groupId>
+  <version>1.9.0</version>
   <artifactId>HeroicDeath</artifactId>
+  <packaging>jar</packaging>
   <name>HeroicDeath</name>
+  <description>Minecraft plugin for Bukkit that announces player deaths.</description>
+  <url>http://www.thedarktide.net</url>
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.packageName>com.herocraftonline.squallseed31.heroicdeath</project.packageName>
+  </properties>
+  <issueManagement>
+  </issueManagement>
+  <scm>
+  	<connection>scm:git:git://github.com/SquallSeeD31/HeroicDeath.git</connection>
+  	<developerConnection>scm:git:git@github.com:SquallSeeD31/HeroicDeath.git</developerConnection>
+  	<url>https://github.com/SquallSeeD31/HeroicDeath/tree/master/</url>
+  </scm>
   <build>
+    <finalName>${project.artifactId}</finalName>
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources>
   	<plugins>
   		<plugin>
   			<groupId>org.apache.maven.plugins</groupId>
@@ -45,4 +66,6 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
+
+
 </project>

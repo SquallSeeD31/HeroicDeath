@@ -1,4 +1,6 @@
-name: HeroicDeath
-main: com.herocraftonline.squallseed31.heroicdeath.HeroicDeath
-version: 1.8.0.150
+name: ${name}
+main: ${project.packageName}.${project.artifactId}
+version: ${version}
+website: ${url}
+description: ${description}
 author: SquallSeeD31

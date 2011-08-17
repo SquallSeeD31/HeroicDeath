@@ -8,6 +8,7 @@ import org.bukkit.entity.Giant;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player; 
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Spider;
@@ -16,15 +17,16 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageByProjectileEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityListener; 
+import org.bukkit.event.player.PlayerListener;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
-
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,7 +85,7 @@ public class HeroicDeathListener extends EntityListener {
 	 String attackerName = plugin.mobUnknown;
 	 if (damager instanceof Player) {
 		 Player attacker = (Player)damager;
-		 attackerName = attacker.getDisplayName();
+		 attackerName = HeroicDeath.getPlayerName(attacker);
 	 } else if (damager instanceof PigZombie) {
 		 attackerName = plugin.mobPigZombie;
 	 } else if (damager instanceof Giant) {
@@ -114,8 +116,7 @@ public class HeroicDeathListener extends EntityListener {
 		 return;
 	 else
 		 player = (Player)event.getEntity();
-	 String name = player.getName();
-	 DeathCertificate dc = deathRecords.remove(name);
+	 DeathCertificate dc = deathRecords.get(player.getName());
 	 if (dc == null)
 		 dc = new DeathCertificate(player);
 	 String killString = dc.getMessage();
@@ -125,10 +126,11 @@ public class HeroicDeathListener extends EntityListener {
 	 }
 	 HeroicDeathEvent hde = new HeroicDeathEvent(dc);
 	 plugin.getServer().getPluginManager().callEvent(hde);
-	 if(!plugin.getEventsOnly()){
-		plugin.getServer().broadcastMessage(HeroicDeath.messageColor + dc.getMessage() + " ");
+	 dc = hde.getDeathCertificate();
+	 if(!hde.isCancelled() && !plugin.getEventsOnly()){
+		plugin.broadcast(dc);
 	 }
-	 HeroicDeath.log.info("[HeroicDeath]" + dc.getMessage().replaceAll("(?i)\u00A7[0-F]", ""));
+	 HeroicDeath.log.info("[HeroicDeath] " + dc.getMessage().replaceAll("(?i)\u00A7[0-F]", ""));
 	 plugin.recordDeath(dc);
  }
  
@@ -153,19 +155,19 @@ public class HeroicDeathListener extends EntityListener {
 	 int damage = event.getDamage();
 	 int oldHealth = player.getHealth();
 	 int newHealth = oldHealth - damage;
-	 HeroicDeath.debug("Player damaged: " + name + " [" + oldHealth + "-" + damage + "=" + newHealth + "] Cause: " + event.getCause().toString());	 
-	 if (newHealth <= 0) {
-		 String killString = name + " died.";
+	 HeroicDeath.debug("Player damaged: " + name + " [" + oldHealth + "-" + damage + "=" + newHealth + "] Cause: " + event.getCause().toString() + " Ticks: " + player.getNoDamageTicks());
+	 if (newHealth <= 0 && (!deathRecords.containsKey(name) || (deathRecords.get(name).getCause() != DamageCause.LAVA && deathRecords.get(name).getCause() != DamageCause.LIGHTNING && deathRecords.get(name).getCause() != DamageCause.ENTITY_ATTACK))) {
+		 String killString = HeroicDeath.getPlayerName(player) + " died.";
 		 DeathCertificate dc = new DeathCertificate(player, event.getCause());
 		 Entity damager = null;
 		 Block damageBlock = null;
 		 String blockName = null;
-		 if (event instanceof EntityDamageByProjectileEvent) {
-			 EntityDamageByProjectileEvent subEvent = (EntityDamageByProjectileEvent)event;
-			 damager = subEvent.getDamager();
-		 } else if (event instanceof EntityDamageByEntityEvent) {
+		 if (event instanceof EntityDamageByEntityEvent) {
 			 EntityDamageByEntityEvent subEvent = (EntityDamageByEntityEvent)event;
 			 damager = subEvent.getDamager();
+			 if (subEvent.getCause() == DamageCause.PROJECTILE) {
+				 damager = ((Projectile)damager).getShooter();
+			 }
 		 } else if (event instanceof EntityDamageByBlockEvent) {
 			 EntityDamageByBlockEvent subEvent = (EntityDamageByBlockEvent)event;
 			 damageBlock = subEvent.getDamager();
@@ -176,13 +178,14 @@ public class HeroicDeathListener extends EntityListener {
 			 }
 		 }
 		 switch (event.getCause()) {
+    		case PROJECTILE:
 		 	case ENTITY_ATTACK:
 		 		 if (damager == null) {
 					 dc.setAttacker("Dispenser");
 					 killString = getMessage(HeroicDeath.DeathMessages.DispenserMessages, dc);
 				 } else if (damager instanceof Player) {
 					 Player attacker = (Player)damager;
-					 dc.setAttacker(attacker.getDisplayName());
+					 dc.setAttacker(HeroicDeath.getPlayerName(attacker));
 					 dc.setMurderWeapon(getMurderWeapon(attacker));
 					 killString = getMessage(HeroicDeath.DeathMessages.PVPMessages, dc);
 				 } else {
@@ -259,8 +262,35 @@ public class HeroicDeathListener extends EntityListener {
 		 }
 		 dc.setMessage(killString);
 		 deathRecords.put(name, dc);
+		 this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RecordPurge(name), 20L);
 	 }
 	 
    return;
  }
+ 
+ public class RespawnListener extends PlayerListener { 
+	@Override
+	public void onPlayerQuit(PlayerQuitEvent event) {
+		deathRecords.remove(event.getPlayer().getName());
+	}
+
+	@Override
+	public void onPlayerRespawn(PlayerRespawnEvent event) {
+		deathRecords.remove(event.getPlayer().getName());
+	}
+ }
+ 
+ public class RecordPurge implements Runnable {
+		private String player;
+		
+		public RecordPurge(String player) {
+			this.player = player;
+		}
+		
+		public void run() {
+			deathRecords.remove(player);
+			HeroicDeath.debug("Purging player: " + player);
+		}
+
+	}
 }

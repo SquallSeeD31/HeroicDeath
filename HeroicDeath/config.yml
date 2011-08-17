@@ -1,9 +1,65 @@
-events:
-    only: false
+# HeroicDeath Configuration
+# Messages are defined in heroicdeath.messages
+# Items (for PvP kills) are defined in heroicdeath.items
+# This file is for configuration of colors, log preferences and localized mob names
+## Color options
+## message: Text color of death notifications, wrapped around names/item.
+## name: Color for the name of victim and killer.
+## item: Color for the name of the item used in a PvP death.
+#Color is defined according to the Bukkit enum ChatColor
+#Acceptable entries:
+##BLACK
+##DARK_BLUE
+##DARK_GREEN
+##DARK_AQUA
+##DARK_RED
+##DARK_PURPLE
+##GOLD
+##GRAY
+##DARK_GRAY
+##BLUE
+##GREEN
+##AQUA
+##RED
+##LIGHT_PURPLE
+##YELLOW
+##WHITE
+#
+#If color entered is inappropriate, HeroicDeath will default to the following values:
+##message: RED
+##name: DARK_AQUA
+##item: GOLD
 colors:
     message: RED
-    item: GOLD
     name: DARK_AQUA
+    item: GOLD
+
+#Logging Preferences:
+##data: true to log a serialized object representing all the relevant information associated with a death
+##messages: true to log death messages (as output to the server) to a separate file
+##time: Whether or not to timestamp messages (if logging messages), and what timestamp format to use for data/messages
+###stamp: true to timestamp messages
+###format: Uses format strings from Java SimpleDateFormat.  Read all here: http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html
+##files: Filenames to store data/messages in.  A server admin could ostensibly change this value daily/weekly/monthly for collection of timed logs
+###data: Data storage filename
+###messages: Messages storage filename
+log:
+    data: true
+    messages: true
+    time:
+        stamp: true
+        format: MM/dd/yyyy HH:mm:ss z
+    files:
+        data: death_data.log
+        messages: death_messages.log
+
+#Event Support:
+##If you only want HeroicDeath to send its custom event for other plugins to pick up, and NOT send the death message, set this to true.
+events:
+    only: false
+
+#Localized monster names:
+##If you would like to specify custom localization for the mob names, edit the defaults below
 monsters:
     ghast: Ghast
     slime: Slime
@@ -13,14 +69,18 @@ monsters:
     spider: Spider
     creeper: Creeper
     skeleton: Skeleton
+    wolf: Wolf
     unknown: Unknown
     giant: Giant
-    wolf: Wolf
-log:
-    files:
-        data: death_data.log
-        messages: death_messages.log
-    time:
-        format: MM/dd/yyyy HH:mm:ss z
-    data: true
-    messages: true
+#Options
+##useDisplayName: Set to true if you want HeroicDeath to display the player's display name instead of their fixed character name.
+##serverBroadcast: Set to FALSE if you want HeroicDeath to only broadcast its messages in the world they belong to.
+##worlds: Lists of quiet/loud worlds for broadcast targeting. NOTE: World names are case-sensitive.
+###quiet: Worlds listed here will NEVER receive ANY HeroicDeath broadcasts.
+###loud: Worlds listed here will ALWAYS receive ALL HeroicDeath broadcasts.
+options:
+    useDisplayName: false
+    serverBroadcast: true
+    worlds:
+        quiet: [peacefulworld, noobworld]
+        loud: [pvpworld, nether]

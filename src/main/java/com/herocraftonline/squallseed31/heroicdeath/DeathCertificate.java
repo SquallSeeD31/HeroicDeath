@@ -29,19 +29,19 @@ public class DeathCertificate {
 	}
 	
 	public DeathCertificate(Player p) {
-		this(p.getName(),"",null,DamageCause.CUSTOM,null,new Date(),p.getLocation());
+		this(HeroicDeath.getPlayerName(p),"",null,DamageCause.CUSTOM,null,new Date(),p.getLocation());
 	}
 	
 	public DeathCertificate(Player p, DamageCause cause) {
-		this(p.getName(),"",null,cause,null,new Date(),p.getLocation());
+		this(HeroicDeath.getPlayerName(p),"",null,cause,null,new Date(),p.getLocation());
 	}
 	
 	public DeathCertificate(Player p, String attacker, DamageCause cause) {
-		this(p.getName(),attacker,null,cause,null,new Date(),p.getLocation());
+		this(HeroicDeath.getPlayerName(p),attacker,null,cause,null,new Date(),p.getLocation());
 	}
 
 	public DeathCertificate(Player p, String attacker, MaterialData murderWeapon, DamageCause cause, String message) {
-		this(p.getName(),attacker,murderWeapon,cause,message,new Date(),p.getLocation());
+		this(HeroicDeath.getPlayerName(p),attacker,murderWeapon,cause,message,new Date(),p.getLocation());
 	}
 	
 	public void setLocation(Location location) {
@@ -100,7 +100,7 @@ public class DeathCertificate {
 	public String getDefender() {
 		return defender;
 	}
-
+	
 	@Override
 	public String toString() {
 		double x = Math.round(location.getX());

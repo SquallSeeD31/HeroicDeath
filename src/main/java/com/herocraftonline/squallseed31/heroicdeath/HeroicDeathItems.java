@@ -77,7 +77,12 @@ public class HeroicDeathItems
         writer.write("bed block:26\r\n");
         writer.write("powered rail:27\r\n");
         writer.write("detector rail:28\r\n");
+        writer.write("sticky piston:29\r\n");
         writer.write("web:30\r\n");
+        writer.write("tall grass:31\r\n");
+        writer.write("dead shrub:32\r\n");
+        writer.write("piston:33\r\n");
+        writer.write("extended piston:34\r\n");
         writer.write("wool:35:0x0\r\n");
         writer.write("white wool:35:0x0\r\n");
         writer.write("orange wool:35:0x1\r\n");
@@ -96,6 +101,7 @@ public class HeroicDeathItems
         writer.write("dark green wool:35:0xd\r\n");
         writer.write("red wool:35:0xe\r\n");
         writer.write("black wool:35:0xf\r\n");
+        writer.write("moving block:36\r\n");
         writer.write("flower:37\r\n");
         writer.write("yellow flower:37\r\n");
         writer.write("rose:38\r\n");
@@ -163,6 +169,7 @@ public class HeroicDeathItems
         writer.write("off redstone repeater:93\r\n");
         writer.write("on redstone repeater:94\r\n");
         writer.write("locked chest:95\r\n");
+        writer.write("trapdoor:96\r\n");
         writer.write("iron shovel:256\r\n");
         writer.write("iron pickaxe:257\r\n");
         writer.write("iron axe:258\r\n");
@@ -284,6 +291,8 @@ public class HeroicDeathItems
         writer.write("bed:355\r\n");
         writer.write("redstone repeater:356\r\n");
         writer.write("cookie:357\r\n");
+        writer.write("map:358\r\n");
+        writer.write("shears:359\r\n");
         writer.write("gold record:2256\r\n");
         writer.write("green record:2257\r\n");
       } catch (Exception e) {
