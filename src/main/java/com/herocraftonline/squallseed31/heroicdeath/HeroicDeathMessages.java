@@ -46,6 +46,7 @@ public class HeroicDeathMessages
 	 *  - %d for defender (victim)
 	 *  - %a for attacker (PvP Player or Monster)
 	 *  - %i for item wielded in PvP kill
+	 *  - %w for world the death occurred in
 	 */
     if (this.DrownMessages.size() == 0)
       this.DrownMessages.add("%d drowned");
@@ -231,6 +232,7 @@ public class HeroicDeathMessages
       writer.write("# - %d holds the name of the dead player.\r\n");
       writer.write("# - %a holds the name of the attacking entity (player or monster) for PVP and Monster deaths.\r\n");
       writer.write("# - %i holds the name of the attacking player's current item for PVP deaths.\r\n");
+      writer.write("# - %w holds the world the death occurred in\r\n");
       writer.write("#Custom item names may be defined in the 'heroicdeath.items' file.\r\n");
       writer.write(":Drown\r\n");
       writer.write("%d drowned\r\n");

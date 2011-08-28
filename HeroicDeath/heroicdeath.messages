@@ -6,6 +6,7 @@
 # - %d holds the name of the dead player.
 # - %a holds the name of the attacking entity (player or monster) for PVP and Monster deaths.
 # - %i holds the name of the attacking player's current item for PVP deaths.
+# - %w holds the world the death occurred in
 #Custom item names may be defined in the 'heroicdeath.items' file.
 :Drown
 %d drowned

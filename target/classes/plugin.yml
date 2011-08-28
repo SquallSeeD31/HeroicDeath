@@ -1,6 +1,6 @@
 name: HeroicDeath
 main: com.herocraftonline.squallseed31.heroicdeath.HeroicDeath
-version: 1.9.0
+version: 1.9.1
 website: http://www.thedarktide.net
 description: Minecraft plugin for Bukkit that announces player deaths.
 author: SquallSeeD31
