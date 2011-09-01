@@ -77,7 +77,7 @@ public class HeroicDeath extends JavaPlugin
 	version = pdfFile.getVersion();
 	dataFolder = getDataFolder();
     PluginManager pm = getServer().getPluginManager();
-    pm.registerEvent(Event.Type.ENTITY_DAMAGE, this.listener, Event.Priority.Monitor, this);
+    //pm.registerEvent(Event.Type.ENTITY_DAMAGE, this.listener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.ENTITY_DEATH, this.listener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.PLAYER_RESPAWN, this.playerListener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.PLAYER_QUIT, this.playerListener, Event.Priority.Monitor, this);

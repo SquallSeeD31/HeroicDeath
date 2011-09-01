@@ -119,8 +119,9 @@ public class HeroicDeathListener extends EntityListener {
 	 else
 		 player = (Player)event.getEntity();
 	 DeathCertificate dc = deathRecords.containsKey(player.getName()) ? deathRecords.get(player.getName()) : processDamageEvent(player.getLastDamageCause());
-	 if (dc == null)
+	 if (dc == null) {
 		 dc = new DeathCertificate(player);
+	 }
 	 String killString = dc.getMessage();
 	 if (killString == null) {
 		 killString = getMessage(HeroicDeath.DeathMessages.OtherMessages, dc);
@@ -134,7 +135,6 @@ public class HeroicDeathListener extends EntityListener {
 	 }
 	 HeroicDeath.log.info("[HeroicDeath] " + dc.getMessage().replaceAll("(?i)\u00A7[0-F]", ""));
 	 plugin.recordDeath(dc);
-	 deathRecords.remove(player.getName());
  }
  
  public void onEntityDamage(EntityDamageEvent event)
@@ -161,7 +161,7 @@ public class HeroicDeathListener extends EntityListener {
 	 HeroicDeath.debug("Player damaged: " + name + " [" + oldHealth + "-" + damage + "=" + newHealth + "] Cause: " + event.getCause().toString() + " Ticks: " + player.getNoDamageTicks());
 	 if (newHealth <= 0 && (!deathRecords.containsKey(name) || (deathRecords.get(name).getCause() != DamageCause.LAVA && deathRecords.get(name).getCause() != DamageCause.LIGHTNING && deathRecords.get(name).getCause() != DamageCause.ENTITY_ATTACK))) {
 		 DeathCertificate dc = processDamageEvent(event);
-		 if (dc != null) {
+		 if (dc != null && dc.getCause() != DamageCause.CUSTOM) {
 			 deathRecords.put(name, dc);
 			 this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RecordPurge(name), 20L);
 		 }
@@ -278,6 +278,9 @@ public class HeroicDeathListener extends EntityListener {
 			break;
 		case LIGHTNING:
 			killString = getMessage(HeroicDeath.DeathMessages.LightningMessages, dc);
+			break;
+		case SUICIDE:
+			killString = getMessage(HeroicDeath.DeathMessages.SuicideMessages, dc);
 			break;
 		default:
 		{
