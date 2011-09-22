@@ -45,7 +45,14 @@ note block:25
 bed block:26
 powered rail:27
 detector rail:28
+sticky piston:29
 web:30
+tall grass:31
+dead shrub:32:0x0
+tall grass:32:0x1
+fern:32:0x2
+piston:33
+extended piston:34
 wool:35:0x0
 white wool:35:0x0
 orange wool:35:0x1
@@ -64,6 +71,7 @@ brown wool:35:0xc
 dark green wool:35:0xd
 red wool:35:0xe
 black wool:35:0xf
+moving block:36
 flower:37
 yellow flower:37
 rose:38
@@ -77,10 +85,16 @@ stone double slab:43:0x0
 sandstone double slab:43:0x1
 wooden double slab:43:0x2
 cobblestone double slab:43:0x3
+brick double slab:43:0x4
+stone brick double slab:43:0x5
+smooth stone double slab:43:0x6
 stone slab:44:0x0
 sandstone slab:44:0x1
 wooden slab:44:0x2
 cobblestone slab:44:0x3
+brick slab:44:0x4
+stone brick slab:44:0x5
+smooth stone slab:44:0x6
 brick block:45
 TNT:46
 bookshelf:47
@@ -128,9 +142,28 @@ soul sand:88
 glowstone:89
 portal:90
 jack o lantern:91
+cake block:92
 off redstone repeater:93
 on redstone repeater:94
 locked chest:95
+trapdoor:96
+hidden silverfish stone block:97:0x0
+hidden silverfish cobblestone block:97:0x1
+hidden silverfish stone brick block:97:0x2
+stone brick:98:0x0
+mossy stone brick:98:0x1
+cracked stone brick:98:0x2
+huge brown mushroom:99
+huge red mushroom:100
+iron bars:101
+glass pane:102
+melon:103
+pumpkin stem:104
+melon stem:105
+vines:106
+fence gate:107
+brick stairs:108
+stone brick stairs:109
 iron shovel:256
 iron pickaxe:257
 iron axe:258
@@ -234,7 +267,6 @@ ink sack:351:0x0
 rose red:351:0x1
 cactus green:351:0x2
 coco beans:351:0x3
-
 lapis lazuli:351:0x4
 purple dye:351:0x5
 cyan dye:351:0x6
@@ -253,5 +285,16 @@ cake:354
 bed:355
 redstone repeater:356
 cookie:357
+map:358
+shears:359
+melon slice:360
+pumpkin seeds:361
+melon seeds:362
+raw beef:363
+steak:364
+raw chicken:365
+cooked chicken:366
+rotten flesh:367
+ender pearl:368
 gold record:2256
 green record:2257

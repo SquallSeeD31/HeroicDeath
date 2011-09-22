@@ -20,6 +20,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.EntityListener; 
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -113,8 +114,10 @@ public class HeroicDeathListener extends EntityListener {
  }
  
  public void onEntityDeath(EntityDeathEvent event) {
+	 if (!(event instanceof PlayerDeathEvent)) return;
+	 ((PlayerDeathEvent) event).setDeathMessage(null);
 	 Player player;
-	 if (!(event.getEntity() instanceof Player))
+	 if (!(event.getEntity() instanceof Player)) //This should never happen now with PlayerDeathEvent, but you never know...
 		 return;
 	 else
 		 player = (Player)event.getEntity();
@@ -281,6 +284,9 @@ public class HeroicDeathListener extends EntityListener {
 			break;
 		case SUICIDE:
 			killString = getMessage(HeroicDeath.DeathMessages.SuicideMessages, dc);
+			break;
+		case STARVATION:
+			killString = getMessage(HeroicDeath.DeathMessages.StarvationMessages, dc);
 			break;
 		default:
 		{

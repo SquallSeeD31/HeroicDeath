@@ -34,6 +34,7 @@ public class HeroicDeathMessages
   public ArrayList<String> DispenserMessages = new ArrayList<String>();
   public ArrayList<String> LightningMessages = new ArrayList<String>();
   public ArrayList<String> SuicideMessages = new ArrayList<String>();
+  public ArrayList<String> StarvationMessages = new ArrayList<String>();
   public ArrayList<String> OtherMessages = new ArrayList<String>();
   private String location = "heroicdeath.messages";
 
@@ -77,6 +78,8 @@ public class HeroicDeathMessages
     	this.LightningMessages.add("%d got electrocuted.");
     if (this.SuicideMessages.size() == 0)
     	this.SuicideMessages.add("%d committed suicide.");
+    if (this.StarvationMessages.size() == 0)
+    	this.StarvationMessages.add("%d starved to death.");
     if (this.OtherMessages.size() == 0)
       this.OtherMessages.add("%d died from unknown causes");
   }
@@ -92,51 +95,53 @@ public class HeroicDeathMessages
       {
         if ((thisLine.contains("#")) || (thisLine.equals("")))
           continue;
-        if (thisLine.toLowerCase().equals(":drown"))
+        if (thisLine.equalsIgnoreCase(":drown"))
           currentParse = HeroicDeathMessages.ParseType.Drown;
-        else if (thisLine.toLowerCase().equals(":cactus"))
+        else if (thisLine.equalsIgnoreCase(":cactus"))
           currentParse = HeroicDeathMessages.ParseType.Cactus;
-        else if (thisLine.toLowerCase().equals(":fire"))
+        else if (thisLine.equalsIgnoreCase(":fire"))
           currentParse = HeroicDeathMessages.ParseType.Fire;
-        else if (thisLine.toLowerCase().equals(":explosion"))
+        else if (thisLine.equalsIgnoreCase(":explosion"))
           currentParse = HeroicDeathMessages.ParseType.Explosion;
-        else if (thisLine.toLowerCase().equals(":creeper"))
+        else if (thisLine.equalsIgnoreCase(":creeper"))
           currentParse = HeroicDeathMessages.ParseType.Creeper;
-        else if (thisLine.toLowerCase().equals(":fall"))
+        else if (thisLine.equalsIgnoreCase(":fall"))
           currentParse = HeroicDeathMessages.ParseType.Fall;
-        else if (thisLine.toLowerCase().equals(":pvp"))
+        else if (thisLine.equalsIgnoreCase(":pvp"))
           currentParse = HeroicDeathMessages.ParseType.PVP;
-        else if (thisLine.toLowerCase().equals(":void"))
+        else if (thisLine.equalsIgnoreCase(":void"))
           currentParse = HeroicDeathMessages.ParseType.Void;
-        else if (thisLine.toLowerCase().equals(":monsters"))
+        else if (thisLine.equalsIgnoreCase(":monsters"))
           currentParse = HeroicDeathMessages.ParseType.Monster;
-        else if (thisLine.toLowerCase().equals(":ghast"))
+        else if (thisLine.equalsIgnoreCase(":ghast"))
             currentParse = HeroicDeathMessages.ParseType.Ghast;
-        else if (thisLine.toLowerCase().equals(":slime"))
+        else if (thisLine.equalsIgnoreCase(":slime"))
             currentParse = HeroicDeathMessages.ParseType.Slime;
-        else if (thisLine.toLowerCase().equals(":zombie"))
+        else if (thisLine.equalsIgnoreCase(":zombie"))
             currentParse = HeroicDeathMessages.ParseType.Zombie;
-        else if (thisLine.toLowerCase().equals(":pigzombie"))
+        else if (thisLine.equalsIgnoreCase(":pigzombie"))
             currentParse = HeroicDeathMessages.ParseType.PigZombie;
-        else if (thisLine.toLowerCase().equals(":spider"))
+        else if (thisLine.equalsIgnoreCase(":spider"))
             currentParse = HeroicDeathMessages.ParseType.Spider;
-        else if (thisLine.toLowerCase().equals(":skeleton"))
+        else if (thisLine.equalsIgnoreCase(":skeleton"))
             currentParse = HeroicDeathMessages.ParseType.Skeleton;
-        else if (thisLine.toLowerCase().equals(":giant"))
+        else if (thisLine.equalsIgnoreCase(":giant"))
             currentParse = HeroicDeathMessages.ParseType.Giant;
-        else if (thisLine.toLowerCase().equals(":wolf"))
+        else if (thisLine.equalsIgnoreCase(":wolf"))
         	currentParse = HeroicDeathMessages.ParseType.Wolf;
-        else if (thisLine.toLowerCase().equals(":lava"))
+        else if (thisLine.equalsIgnoreCase(":lava"))
           currentParse = HeroicDeathMessages.ParseType.Lava;
-        else if (thisLine.toLowerCase().equals(":other"))
+        else if (thisLine.equalsIgnoreCase(":other"))
           currentParse = HeroicDeathMessages.ParseType.Other;
-        else if (thisLine.toLowerCase().equals(":dispenser"))
+        else if (thisLine.equalsIgnoreCase(":dispenser"))
         	currentParse = HeroicDeathMessages.ParseType.Dispenser;
-        else if (thisLine.toLowerCase().equals(":lightning"))
+        else if (thisLine.equalsIgnoreCase(":lightning"))
         	currentParse = HeroicDeathMessages.ParseType.Lightning;
-        else if (thisLine.toLowerCase().equals(":suicide"))
+        else if (thisLine.equalsIgnoreCase(":suicide"))
         	currentParse = HeroicDeathMessages.ParseType.Suicide;
-        else if (thisLine.toLowerCase().equals(":suffocation")) {
+        else if (thisLine.equalsIgnoreCase(":starvation"))
+        	currentParse = HeroicDeathMessages.ParseType.Starvation;
+        else if (thisLine.equalsIgnoreCase(":suffocation")) {
           currentParse = HeroicDeathMessages.ParseType.Suffocation;
         }
         else {
@@ -209,6 +214,9 @@ public class HeroicDeathMessages
         	break;
           case Suicide:
         	this.SuicideMessages.add(thisLine);
+        	break;
+          case Starvation:
+        	this.StarvationMessages.add(thisLine);
         	break;
           case Suffocation:
         	this.SuffocationMessages.add(thisLine);
@@ -284,8 +292,11 @@ public class HeroicDeathMessages
       writer.write("%d has an electrifying personality.\r\n");
       writer.write("%d made a suitable ground.\r\n");
       writer.write(":Suicide\r\n");
-      writer.write("%d committed suicide.");
-      writer.write("%d decided to end it all.");
+      writer.write("%d committed suicide.\r\n");
+      writer.write("%d decided to end it all.\r\n");
+      writer.write(":Starvation\r\n");
+      writer.write("%d died of starvation.\r\n");
+      writer.write("%d forgot to eat.\r\n");
 	} catch (Exception e) {
 		  HeroicDeath.log.info("Exception while creating " + this.location + " " + e.toString());
 	  if (writer != null)
@@ -321,12 +332,14 @@ public class HeroicDeathMessages
     this.DispenserMessages.add("%d got shot by a dispenser.");
     this.LightningMessages.add("%d got electrocuted.");
     this.SuicideMessages.add("%d committed suicide.");
+    this.StarvationMessages.add("%d died of starvation.");
   }
 
   public static enum ParseType
   {
     NONE, Drown, Cactus, Fire, Creeper, Explosion, 
     Fall, PVP, Void, Monster, Ghast, Slime, Zombie, PigZombie, 
-    Spider, Skeleton, Giant, Wolf, Lava, Other, Suffocation, Dispenser, Lightning, Suicide;
+    Spider, Skeleton, Giant, Wolf, Lava, Other, Suffocation, 
+    Dispenser, Lightning, Suicide, Starvation;
   }
 }
