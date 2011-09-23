@@ -121,18 +121,18 @@ public class HeroicDeathListener extends EntityListener {
 		 return;
 	 else
 		 player = (Player)event.getEntity();
-	 DeathCertificate dc = deathRecords.containsKey(player.getName()) ? deathRecords.get(player.getName()) : processDamageEvent(player.getLastDamageCause());
-	 if (dc == null) {
+	 DeathCertificate dc = null;
+	 if (player.getLastDamageCause() != null)
+		 dc = deathRecords.containsKey(player.getName()) ? deathRecords.get(player.getName()) : processDamageEvent(player.getLastDamageCause());
+	 if (dc == null)
 		 dc = new DeathCertificate(player);
-	 }
-	 String killString = dc.getMessage();
-	 if (killString == null) {
-		 killString = getMessage(HeroicDeath.DeathMessages.OtherMessages, dc);
-	 	 dc.setMessage(killString);
-	 }
+	 if (dc.getMessage() == null)
+	 	 dc.setMessage(getMessage(HeroicDeath.DeathMessages.OtherMessages, dc));
 	 HeroicDeathEvent hde = new HeroicDeathEvent(dc);
 	 plugin.getServer().getPluginManager().callEvent(hde);
 	 dc = hde.getDeathCertificate();
+	 if (dc.getMessage() == null)
+	 	 dc.setMessage(getMessage(HeroicDeath.DeathMessages.OtherMessages, dc));
 	 if(!hde.isCancelled() && !plugin.getEventsOnly()){
 		plugin.broadcast(dc);
 	 }
